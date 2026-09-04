@@ -1,0 +1,7 @@
+require("plugins.editor.filetree")
+require("plugins.editor.mini")
+require("plugins.editor.gitsigns")
+require("plugins.editor.lint")
+require("plugins.editor.format")
+require("plugins.editor.trouble")
+require("plugins.editor.harpoon")
