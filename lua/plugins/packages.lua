@@ -32,7 +32,6 @@ vim.pack.add({
 		version = vim.version.range("1.*"),
 	},
 
-	"https://github.com/obsidian-nvim/obsidian.nvim",
 	"https://github.com/mrcjkb/rustaceanvim",
 	"https://github.com/christoomey/vim-tmux-navigator",
 })

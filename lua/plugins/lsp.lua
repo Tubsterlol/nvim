@@ -25,13 +25,9 @@ require("blink.cmp").setup({
 local servers = {
 	"lua_ls",
 	"pyright",
-	"ts_ls",
 	"rust_analyzer",
-	"gopls",
-	"clangd",
 	"html",
 	"cssls",
-	"jsonls",
 	"bashls",
 }
 

@@ -1,7 +1,6 @@
 require("plugins.packages")
 
 require("plugins.treesitter")
-require("plugins.obsidian")
 require("plugins.ui")
 require("plugins.bufferline")
 require("plugins.telescope")
