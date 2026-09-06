@@ -2,13 +2,6 @@ local conform = require("conform")
 
 conform.setup({
 	formatters_by_ft = {
-		c = { "clang_format" },
-		css = { "prettier" },
-		html = { "prettier" },
-		javascript = { "prettier" },
-		json = { "prettier" },
-		lua = { "stylua" },
-		markdown = { "prettier" },
 		python = { "ruff_format" },
 		rust = { "rustfmt" },
 	},
@@ -21,3 +14,7 @@ conform.setup({
 vim.keymap.set("n", "<leader>s", function()
 	conform.format({ async = true, lsp_format = "fallback" })
 end, { silent = true, desc = "Format buffer" })
+
+vim.api.nvim_create_user_command("Format", function()
+	conform.format({ async = true, lsp_format = "fallback" })
+end, { desc = "Format current buffer" })

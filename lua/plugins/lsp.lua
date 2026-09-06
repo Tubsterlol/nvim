@@ -26,9 +26,6 @@ local servers = {
 	"lua_ls",
 	"pyright",
 	"rust_analyzer",
-	"html",
-	"cssls",
-	"bashls",
 }
 
 local capabilities = require("blink.cmp").get_lsp_capabilities()

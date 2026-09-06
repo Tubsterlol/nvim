@@ -43,16 +43,6 @@ map("n", "<S-CR>", "O<Esc>", { silent = true })
 map("n", "<leader>gd", "<Cmd>Gdiffsplit<CR>", { silent = true })
 map("n", "<leader>gb", "<Cmd>Git blame<CR>", { silent = true })
 
-map("n", "<C-h>", "<Cmd>TmuxNavigateLeft<CR>", { silent = true })
-map("n", "<C-j>", "<Cmd>TmuxNavigateDown<CR>", { silent = true })
-map("n", "<C-k>", "<Cmd>TmuxNavigateUp<CR>", { silent = true })
-map("n", "<C-l>", "<Cmd>TmuxNavigateRight<CR>", { silent = true })
-
-map("i", "<C-h>", "<C-\\><C-n><Cmd>TmuxNavigateLeft<CR>", { silent = true })
-map("i", "<C-j>", "<C-\\><C-n><Cmd>TmuxNavigateDown<CR>", { silent = true })
-map("i", "<C-k>", "<C-\\><C-n><Cmd>TmuxNavigateUp<CR>", { silent = true })
-map("i", "<C-l>", "<C-\\><C-n><Cmd>TmuxNavigateRight<CR>", { silent = true })
-
 map("n", "\\", "<leader>q", { remap = true, silent = true })
 
 map("n", "<F2>", function()
