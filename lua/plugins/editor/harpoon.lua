@@ -1,25 +1,30 @@
 local harpoon = require("harpoon")
-local mark = require("harpoon.mark")
-local ui = require("harpoon.ui")
 
-harpoon.setup()
+harpoon:setup()
 
 local map = vim.keymap.set
+local list = harpoon:list()
+
 map("n", "<leader>ha", function()
-	mark.add_file()
+	list:add()
 end, { silent = true, desc = "Harpoon add file" })
+
 map("n", "<leader>hm", function()
-	ui.toggle_quick_menu()
+	harpoon.ui:toggle_quick_menu(list)
 end, { silent = true, desc = "Harpoon menu" })
+
 map("n", "<leader>h1", function()
-	ui.nav_file(1)
+	list:select(1)
 end, { silent = true, desc = "Harpoon file 1" })
+
 map("n", "<leader>h2", function()
-	ui.nav_file(2)
+	list:select(2)
 end, { silent = true, desc = "Harpoon file 2" })
+
 map("n", "<leader>h3", function()
-	ui.nav_file(3)
+	list:select(3)
 end, { silent = true, desc = "Harpoon file 3" })
+
 map("n", "<leader>h4", function()
-	ui.nav_file(4)
+	list:select(4)
 end, { silent = true, desc = "Harpoon file 4" })
