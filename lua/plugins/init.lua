@@ -1,10 +1,10 @@
 vim.pack.add({
-	"https://www.github.com/echasnovski/mini.nvim",
+	"https://github.com/echasnovski/mini.nvim",
 	"https://github.com/nvim-lualine/lualine.nvim",
 	"https://github.com/akinsho/bufferline.nvim",
 	"https://github.com/nvim-lua/plenary.nvim",
 	"https://github.com/nvim-telescope/telescope.nvim",
-	"https://www.github.com/nvim-tree/nvim-tree.lua",
+	"https://github.com/nvim-tree/nvim-tree.lua",
 	"https://github.com/stevearc/oil.nvim",
 	"https://github.com/nvim-tree/nvim-web-devicons",
 	"https://github.com/lewis6991/gitsigns.nvim",
@@ -17,6 +17,8 @@ vim.pack.add({
 	"https://github.com/nvim-neotest/nvim-nio",
 	"https://github.com/folke/trouble.nvim",
 	"https://github.com/folke/which-key.nvim",
+    "https://github.com/goolord/alpha-nvim",
+    "https://github.com/Shatur/neovim-session-manager",
 	{
 		src = "https://github.com/ThePrimeagen/harpoon",
 		branch = "harpoon2",
@@ -36,6 +38,10 @@ vim.pack.add({
 	},
 	"https://github.com/mrcjkb/rustaceanvim",
 }, { confirm = false })
+
+require("config.alpha")
+require("config.session")
+require("plugins.editor")
 
 require("lualine").setup({
 	options = {
@@ -215,89 +221,3 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
-local api = require("nvim-tree.api")
-require("nvim-tree").setup({
-	sort_by = "case_sensitive",
-	view = { width = 32 },
-	renderer = {
-		group_empty = true,
-		icons = {
-			show = {
-				file = true,
-				folder = true,
-				folder_arrow = true,
-				git = true,
-			},
-		},
-	},
-	filters = { dotfiles = false },
-	on_attach = function(buffer)
-		api.config.mappings.default_on_attach(buffer)
-		vim.keymap.set("n", "<leader>nc", api.fs.create, { buffer = buffer, silent = true, desc = "Create file or directory (end directory with /)" })
-	end,
-})
-vim.keymap.set("n", "<leader>ex", "<Cmd>NvimTreeToggle<CR>", { silent = true, desc = "Toggle file tree" })
-vim.keymap.set("n", "<leader>ef", "<Cmd>NvimTreeFindFile<CR>", { silent = true, desc = "Reveal file in tree" })
-
-require("mini.pairs").setup()
-require("mini.surround").setup()
-
-require("gitsigns").setup({
-	current_line_blame = false,
-	on_attach = function(buffer)
-		local map = function(mode, lhs, rhs, desc)
-			vim.keymap.set(mode, lhs, rhs, { buffer = buffer, silent = true, desc = desc })
-		end
-		map("n", "]c", function() if vim.wo.diff then vim.cmd.normal({ "]c", bang = true }) else require("gitsigns").nav_hunk("next") end end, "Next hunk")
-		map("n", "[c", function() if vim.wo.diff then vim.cmd.normal({ "[c", bang = true }) else require("gitsigns").nav_hunk("prev") end end, "Previous hunk")
-		map("n", "<leader>gp", require("gitsigns").preview_hunk, "Preview hunk")
-		map("n", "<leader>gr", require("gitsigns").reset_hunk, "Reset hunk")
-		map("n", "<leader>gs", require("gitsigns").stage_hunk, "Stage hunk")
-	end,
-})
-
-local lint = require("lint")
-lint.linters_by_ft = {
-	c = { "clangtidy" },
-	cpp = { "clangtidy" },
-	javascript = { "eslint_d" },
-	json = { "jsonlint" },
-	lua = { "luacheck" },
-	python = { "ruff" },
-	rust = { "clippy" },
-	typescript = { "eslint_d" },
-}
-vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
-	group = vim.api.nvim_create_augroup("LintConfig", { clear = true }),
-	callback = function() lint.try_lint() end,
-})
-vim.keymap.set("n", "<leader>ll", function() lint.try_lint() end, { silent = true, desc = "Run lint" })
-
-local conform = require("conform")
-conform.setup({
-	formatters_by_ft = {
-		python = { "ruff_format" },
-		rust = { "rustfmt" },
-	},
-	format_on_save = { timeout_ms = 2000, lsp_format = "fallback" },
-})
-vim.keymap.set("n", "<leader>s", function() conform.format({ async = true, lsp_format = "fallback" }) end, { silent = true, desc = "Format buffer" })
-vim.api.nvim_create_user_command("Format", function() conform.format({ async = true, lsp_format = "fallback" }) end, { desc = "Format current buffer" })
-
-require("trouble").setup({
-	focus = true,
-	icons = { indent = { middle = "│ ", last = "└─", top = "─" } },
-})
-map("n", "<leader>xx", "<Cmd>Trouble diagnostics toggle<CR>", { silent = true, desc = "Toggle diagnostics" })
-map("n", "<leader>xr", "<Cmd>Trouble lsp_references toggle<CR>", { silent = true, desc = "Toggle references" })
-map("n", "<leader>xs", "<Cmd>Trouble symbols toggle focus=false<CR>", { silent = true, desc = "Toggle symbols" })
-
-local harpoon = require("harpoon")
-harpoon:setup()
-local harpoon_list = harpoon:list()
-map("n", "<leader>ha", function() harpoon_list:add() end, { silent = true, desc = "Harpoon add file" })
-map("n", "<leader>hm", function() harpoon.ui:toggle_quick_menu(harpoon_list) end, { silent = true, desc = "Harpoon menu" })
-map("n", "<leader>h1", function() harpoon_list:select(1) end, { silent = true, desc = "Harpoon file 1" })
-map("n", "<leader>h2", function() harpoon_list:select(2) end, { silent = true, desc = "Harpoon file 2" })
-map("n", "<leader>h3", function() harpoon_list:select(3) end, { silent = true, desc = "Harpoon file 3" })
-map("n", "<leader>h4", function() harpoon_list:select(4) end, { silent = true, desc = "Harpoon file 4" })

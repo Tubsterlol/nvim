@@ -80,3 +80,7 @@ map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
 map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+
+vim.keymap.set("n", "<leader>ss", "<cmd>SessionManager load_session<CR>")
+vim.keymap.set("n", "<leader>sn", "<cmd>SessionManager save_current_session<CR>")
+vim.keymap.set("n", "<leader>sd", "<cmd>SessionManager delete_session<CR>")

@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "alpha-nvim": {
+      "rev": "4ba26e41990c11620c96c0e1cff20eab65efde4a",
+      "src": "https://github.com/goolord/alpha-nvim"
+    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
@@ -44,6 +48,10 @@
     "mini.nvim": {
       "rev": "9d01f392b33fb2ba36fbc87fc0bf4453e63ffb0a",
       "src": "https://www.github.com/echasnovski/mini.nvim"
+    },
+    "neovim-session-manager": {
+      "rev": "89d253a6c68af60b49570044591d5b8701866601",
+      "src": "https://github.com/Shatur/neovim-session-manager"
     },
     "nvim": {
       "rev": "edefef779ab08ce1a4a404713e3012b0d202bd35",
