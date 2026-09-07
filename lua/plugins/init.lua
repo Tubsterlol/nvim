@@ -135,7 +135,7 @@ map("n", "<leader>ui", "<Cmd>IBLEnable<CR>", { silent = true, desc = "Enable ind
 map("n", "<leader>uI", "<Cmd>IBLDisable<CR>", { silent = true, desc = "Disable indent guides" })
 
 local which_key = require("which-key")
-which_key.setup({ preset = "modern", delay = 300 })
+which_key.setup({ preset = "modern", delay = 300, preset = "helix"})
 which_key.add({
 	{ "<leader>b", group = "Buffers" },
 	{ "<leader>d", group = "Debug" },
@@ -301,4 +301,3 @@ map("n", "<leader>h1", function() harpoon_list:select(1) end, { silent = true, d
 map("n", "<leader>h2", function() harpoon_list:select(2) end, { silent = true, desc = "Harpoon file 2" })
 map("n", "<leader>h3", function() harpoon_list:select(3) end, { silent = true, desc = "Harpoon file 3" })
 map("n", "<leader>h4", function() harpoon_list:select(4) end, { silent = true, desc = "Harpoon file 4" })
-
