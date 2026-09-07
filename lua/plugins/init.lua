@@ -21,7 +21,7 @@ vim.pack.add({
     "https://github.com/Shatur/neovim-session-manager",
 	{
 		src = "https://github.com/ThePrimeagen/harpoon",
-		branch = "harpoon2",
+		version = "harpoon2",
 	},
 	"https://github.com/tpope/vim-fugitive",
 	{
